@@ -49,12 +49,17 @@ def analyze(request):
     # writing code to remove spaces in the text
     if extraspaceremove == 'on':
         purpose += "REMOVING EXTRA-SPACES, "
-        analyzed_text.join(analyzed_text.split())
+        new = ""
+        for index, char in enumerate(analyzed_text):
+            if index+1 != len(analyzed_text):
+                if not(analyzed_text[index] == ' ' and analyzed_text[index+1]== " "):
+                    new += char
+        analyzed_text = new
 
     # writing code to calculate the length of the string
     if charcount == 'on':
         purpose += "COUNTING THE LENGTH OF THE STRING"
-        analyzed_text = analyzed_text + ' THE LENGTH OF THE TEXT IS ' + str(len(analyzed_text))
+        analyzed_text = analyzed_text + ' ==>[THE LENGTH OF THE TEXT IS ' + str(len(analyzed_text)) + ']'
 
     params = {'purpose': purpose, 'analyzed_text': analyzed_text}
 
